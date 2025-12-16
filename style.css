@@ -1,0 +1,147 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* BODY */
+  body {
+    background: linear-gradient(120deg, #2563eb, #1e40af);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* CONTAINER */
+  .container {
+    background: #fff;
+    width: 380px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+  
+  /* HEADINGS */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e40af;
+  }
+  
+  /* INPUTS */
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  /* BUTTON */
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background: #1e40af;
+  }
+  
+  /* DASHBOARD */
+  .dashboard {
+    width: 90%;
+    max-width: 1100px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  /* NAV */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .nav h3 {
+    color: #1e40af;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: white;
+    background: #ef4444;
+    padding: 8px 14px;
+    border-radius: 6px;
+  }
+  
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 15px;
+  }
+  
+  .card {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  .card h4 {
+    color: #1e40af;
+    margin-bottom: 8px;
+  }
+  
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background: #2563eb;
+    color: white;
+  }
+  
+  /* RATING STARS */
+  .stars {
+    color: gold;
+    font-size: 18px;
+  }
+  
+  /* FILE INPUT */
+  input[type="file"] {
+    border: none;
+  }
+  
+  /* SEARCH */
+  .search {
+    margin-bottom: 15px;
+  }
+  
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+  

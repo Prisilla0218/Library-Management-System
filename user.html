@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- NAV -->
+  <div class="nav">
+    <h3>User Dashboard</h3>
+    <a href="/logout">Logout</a>
+  </div>
+
+  <!-- SEARCH -->
+  <input type="text" id="search" class="search" placeholder="Search books...">
+
+  <!-- BOOK LIST -->
+  <table id="bookTable">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Ebook</th>
+      <th>Rate</th>
+    </tr>
+  </table>
+
+</div>
+
+<script>
+let booksData = [];
+
+fetch('/user/books')
+.then(res => res.json())
+.then(data => {
+  booksData = data;
+  loadBooks(data);
+});
+
+function loadBooks(data) {
+  let table = document.getElementById('bookTable');
+  table.innerHTML = `
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Ebook</th>
+      <th>Rate</th>
+    </tr>`;
+  
+  data.forEach(b => {
+    table.innerHTML += `
+      <tr>
+        <td>${b.title}</td>
+        <td>${b.author}</td>
+        <td><a href="/uploads/${b.pdf}" target="_blank">View</a></td>
+        <td>
+          <select onchange="rateBook(${b.id}, this.value)">
+            <option value="">⭐</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </td>
+      </tr>`;
+  });
+}
+
+function rateBook(bookId, rating) {
+  fetch('/user/rate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ book_id: bookId, rating })
+  })
+  .then(() => alert("Rated! +10 Points"));
+}
+
+document.getElementById('search').addEventListener('keyup', function () {
+  let value = this.value.toLowerCase();
+  let filtered = booksData.filter(b =>
+    b.title.toLowerCase().includes(value) ||
+    b.author.toLowerCase().includes(value)
+  );
+  loadBooks(filtered);
+});
+</script>
+
+</body>
+</html>

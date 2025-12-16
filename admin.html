@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- NAV -->
+  <div class="nav">
+    <h3>Admin Dashboard</h3>
+    <a href="/logout">Logout</a>
+  </div>
+
+  <!-- ADD BOOK -->
+  <div class="card">
+    <h4>Add Book</h4>
+    <form action="/admin/add" method="post" enctype="multipart/form-data">
+      <input type="text" name="title" placeholder="Book Title" required>
+      <input type="text" name="author" placeholder="Author Name" required>
+      <input type="file" name="pdf" accept=".pdf" required>
+      <button type="submit">Add Book</button>
+    </form>
+  </div>
+
+  <!-- VIEW BOOKS -->
+  <div class="card">
+    <h4>All Books</h4>
+    <table id="booksTable">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>PDF</th>
+        <th>Delete</th>
+      </tr>
+    </table>
+  </div>
+
+  <!-- LOGIN LOGS -->
+  <div class="card">
+    <h4>Login Logs</h4>
+    <table id="logsTable">
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Login Time</th>
+        <th>Logout Time</th>
+      </tr>
+    </table>
+  </div>
+
+  <!-- GAMIFICATION -->
+  <div class="card">
+    <h4>User Points</h4>
+    <table id="pointsTable">
+      <tr>
+        <th>Username</th>
+        <th>Points</th>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<script>
+fetch('/admin/books')
+.then(res => res.json())
+.then(data => {
+  let table = document.getElementById('booksTable');
+  data.forEach(b => {
+    table.innerHTML += `
+      <tr>
+        <td>${b.title}</td>
+        <td>${b.author}</td>
+        <td><a href="/uploads/${b.pdf}" target="_blank">View</a></td>
+        <td><a href="/admin/delete/${b.id}">Delete</a></td>
+      </tr>`;
+  });
+});
+
+fetch('/admin/logs')
+.then(res => res.json())
+.then(data => {
+  let table = document.getElementById('logsTable');
+  data.forEach(l => {
+    table.innerHTML += `
+      <tr>
+        <td>${l.username}</td>
+        <td>${l.role}</td>
+        <td>${l.login_time}</td>
+        <td>${l.logout_time || '-'}</td>
+      </tr>`;
+  });
+});
+
+fetch('/admin/points')
+.then(res => res.json())
+.then(data => {
+  let table = document.getElementById('pointsTable');
+  data.forEach(p => {
+    table.innerHTML += `
+      <tr>
+        <td>${p.username}</td>
+        <td>${p.points}</td>
+      </tr>`;
+  });
+});
+</script>
+
+</body>
+</html>
